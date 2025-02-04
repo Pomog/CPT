@@ -18,10 +18,29 @@ https://www.netacad.com/resources/lab-downloads?courseLang=en-US
 packettracer
 ```
 ## Exercise 1
-### Objective
+### Objectives
 - Set up three pairs of PCs that can communicate with each other.
 - Understand RJ-45 cables and their types.
 
 1. Open Packet Tracer and create a new project.
 2. Add 6 PCs.
-3. Connect PCs with Copper Cables 
+3. Connect PCs with Copper Cables.
+4. Assign IP Addresses:
+```
+IP Address: 192.168.1.(1-6)
+Subnet Mask: 255.255.255.0
+```
+5. Test Connectivity:
+Open Command Prompt on PC0 
+```
+ping 192.168.1.2
+```
+RJ-45 Cable Types:
+Straight-through (PC to Switch/Router)
+Crossover (PC to PC)
+T568A vs T568B are the two common wiring schemes, which are used to terminate the twisted-pair cable onto the connector interface. The two standards define how the RJ45 pinouts arrange the individual eight wires when linking the RJ45 connector to a cable. These wiring layouts have their own color convention to follow for electrical compatibility. The T-568B wiring scheme is considered to be the more commonly used one.
+
+## Exercise 2
+### Objectives
+- Set up a network with a switch (level 2 - Data Link) and a hub (level 1 - Physical).
+- Understand collision domains and how switches differ from hubs.
