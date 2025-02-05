@@ -54,3 +54,62 @@ T568A vs T568B are the two common wiring schemes, which are used to terminate th
 - Hub Network: ping between two PCs.
 * Switch (Layer 2): Intelligent device, forwards packets based on MAC address.
 * Hub (Layer 1): Broadcasts data to all devices, creating collisions.
+
+## Exercise 3
+### Objectives
+- Set up a DHCP server for IP assignment.
+- Configure an HTTPS server and DNS server.
+
+1. Add a Router, Switch, DHCP Server, Web Server, and PCs.
+- Assigning IP Addresses:
+```
+
+Device IP Address Subnet Mask Gateway
+Router (Interface) 192.168.1.1	255.255.255.0	-
+DHCP Server	192.168.1.10	255.255.255.0	192.168.1.1
+DNS Server	192.168.1.20	255.255.255.0	192.168.1.1
+HTTPS Server	192.168.1.99	255.255.255.0	192.168.1.1
+FTP Server	192.168.1.30	255.255.255.0	192.168.1.1
+```
+3. Configure DHCP Server:
+- Services → DHCP → Enable DHCP.
+-  Set:
+```
+Pool Name: enter Network1.
+Default Gateway: 192.168.1.1
+Subnet Mask: 255.255.255.0
+DNS Server: 192.168.1.20
+Starting IP Address: 192.168.1.100
+Maximum Users: 50
+```
+Testing DHCP:
+Go to each PC → Desktop → IP Configuration.
+Set it to DHCP and check if it gets an IP
+
+3. Configure DNS Server:
+- Services → DNS → Add:
+```
+deep-in-net.local → 192.168.1.99
+deep-in-net.com → 192.168.1.99
+```
+Testing DNS
+```
+nslookup deep-in-net.local
+```
+4. Configure HTTPS Server:
+- Enable HTTPS service, disable HTTP.
+
+
+- Test: HTTPS
+Open a PC browser 
+```
+https://deep-in-net.com.
+```
+
+- Test FTP server:
+```
+C:\>ftp 192.168.1.30
+username: cisco
+ftp>dir
+```
+
