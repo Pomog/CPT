@@ -113,3 +113,6 @@ username: cisco
 ftp>dir
 ```
 
+## Exercise 4
+### Objectives
+
