@@ -35,7 +35,7 @@ Open Command Prompt on PC0
 ```
 ping 192.168.1.2
 ```
-RJ-45 Cable Types:
+* RJ-45 Cable Types:
 Straight-through (PC to Switch/Router)
 Crossover (PC to PC)
 T568A vs T568B are the two common wiring schemes, which are used to terminate the twisted-pair cable onto the connector interface. The two standards define how the RJ45 pinouts arrange the individual eight wires when linking the RJ45 connector to a cable. These wiring layouts have their own color convention to follow for electrical compatibility. The T-568B wiring scheme is considered to be the more commonly used one.
@@ -44,3 +44,13 @@ T568A vs T568B are the two common wiring schemes, which are used to terminate th
 ### Objectives
 - Set up a network with a switch (level 2 - Data Link) and a hub (level 1 - Physical).
 - Understand collision domains and how switches differ from hubs.
+
+1. Open Packet Tracer and create a new project.
+2. Drag 4 PCs, 1 Switch, and 1 Hub onto the workspace.
+3. Connect PCs to Switch, using Straight-through cables.
+4. Assign IPs: Switch 192.168.1.1, 192.168.1.2; Hub 192.168.1.3, 192.168.1.4.
+5. Test Network:
+- Switch Network: ping between two PCs.
+- Hub Network: ping between two PCs.
+* Switch (Layer 2): Intelligent device, forwards packets based on MAC address.
+* Hub (Layer 1): Broadcasts data to all devices, creating collisions.
