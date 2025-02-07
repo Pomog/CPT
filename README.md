@@ -166,3 +166,32 @@ Exit configuration mode and save the settings:
 exit
 write memory
 ```
+5. Test
+Run ping tests from PC0 to PC1 and vice versa
+
+6. Explanations
+7. Conceptual Explanations
+
+### 1. What is a Router and What is Its Role?
+A **router** is a network device that connects different networks and directs data packets based on IP addresses. Its main functions:
+- Routes traffic between different subnets.
+- Determines the best path for data to reach its destination.
+- Acts as a **default gateway** for devices.
+
+### 2. Switch vs. Router
+| Feature  | Switch  | Router  |
+|----------|--------|--------|
+| Function | Connects devices within a LAN using MAC addresses | Connects different networks using IP addresses |
+| OSI Layer | Layer 2 (Data Link) | Layer 3 (Network) |
+| Uses | Used in LANs | Used to connect different networks (e.g., LAN to the Internet) |
+
+### 3. OSI Model Layer Where a Router Operates
+A **router** operates at **Layer 3 (Network Layer)**. It works with **IP addresses** to forward packets between networks.
+
+### 4. What is a Default Gateway?
+A **default gateway** is the router’s IP address within a subnet that a device uses to send data outside its network. In this setup:
+- PC0’s default gateway is `192.168.1.1`.
+- PC1’s default gateway is `192.168.2.1`.
+
+## Exercise 4
+### Objectives
