@@ -112,7 +112,57 @@ C:\>ftp 192.168.1.30
 username: cisco
 ftp>dir
 ```
+| Device  | Function                                      | Layer  | Uses                     |
+|---------|----------------------------------------------|--------|--------------------------|
+| Switch  | Connects devices in a LAN using MAC addresses | Layer 2 | Modern office networks   |
+| Hub     | Broadcasts data to all connected devices    | Layer 1 | Rarely used today        |
+| Router  | Connects different networks using IP addresses | Layer 3 | Home & business internet |
+
 
 ## Exercise 4
 ### Objectives
+- Configure a Network in Cisco Packet Tracer
 
+1. Add Network Devices
+- Open Cisco Packet Tracer.
+- From the End Devices category, drag and drop two PC-PT devices (PC0 and PC1).
+- From the Network Devices → Routers category, drag and drop a Router-PT (1841).
+- From the Connections category, select a Copper Straight-Through cable to connect each PC to the router.
+
+2. Connect the Devices
+- Connect PC0 to Router (FastEthernet0/0).
+- Connect PC1 to Router (FastEthernet0/1).
+- Use Copper Straight-Through cables since we are connecting different device types (PC to Router).
+
+3. Assign PC IP Addresses
+- Click on PC0 → Open the Desktop Tab → Click on IP Configuration.
+- Set the IP Address to 192.168.1.2 and 192.168.2.2
+- Set the Subnet Mask to 255.255.255.0
+- Set the Default Gateway to 192.168.1.1 (Router's interface).
+
+4. Configure the Router
+Click on the Router → Go to the CLI tab.
+Enter configuration mode:
+```
+enable
+configure terminal
+```
+Assign an IP to the first interface (FastEthernet0/0):
+```
+interface FastEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+```
+Assign an IP to the second interface (FastEthernet0/1):
+```
+interface FastEthernet0/1
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+```
+Exit configuration mode and save the settings:
+```
+exit
+write memory
+```
