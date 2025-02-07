@@ -195,3 +195,4 @@ A **default gateway** is the router’s IP address within a subnet that a device
 
 ## Exercise 4
 ### Objectives
+- Creating the Network in Cisco Packet Tracer
