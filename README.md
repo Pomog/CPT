@@ -268,3 +268,118 @@ To verify connectivity:
 ping 192.168.1.3  # Test PC1 → PC2 (same subnet)
 ping 192.168.1.10 # Test PC1 → PC6 (different subnet)
 ```
+
+## Exercise 6
+### Objectives
+- Connecting Two Subnets Using Routers
+
+🔍 Concepts Explained
+- Subnetting - Divides a large network into smaller, manageable sub-networks to improve efficiency and security.
+- Routing Table	- A table inside a router that contains information about available routes and helps determine the best path for data packets.
+- Default Gateway	- The IP address of the router's interface that allows devices in a subnet to communicate outside their own subnet.
+- Static Routing -	Manually configured routes that define a fixed path for network traffic between different subnets.
+- Dynamic Routing -	Automatically discovers the best path for network traffic using protocols like RIP, OSPF, or EIGRP.
+- Ping Command -	Used to test connectivity between devices and verify network configurations.
+
+🗺️ Subnet Plan
+- **Subnet 1:** `192.168.1.0/24` (PC1)
+- **Subnet 2:** `192.168.2.0/24` (PC2)
+- **Point-to-Point Network between Routers:** `10.10.0.0/30`
+
+| Subnet | Network Address | Subnet Mask | Router Interface |
+|--------|----------------|-------------|------------------|
+| **Subnet 1** | `192.168.1.0` | `255.255.255.0` | `192.168.1.1` (Router1 G0/0) |
+| **Subnet 2** | `192.168.2.0` | `255.255.255.0` | `192.168.2.1` (Router2 G0/0) |
+| **Point-to-Point** | `10.10.0.0` | `255.255.255.252` | `10.10.0.1` (Router1 S0/0), `10.10.0.2` (Router2 S0/0) |
+
+## 🛠️ Steps to Configure the Network
+
+### 1️⃣ Add Devices in Cisco Packet Tracer
+- **2 Routers** (Router1 & Router2)
+- **2 PCs** (PC1 & PC2)
+- **1 Serial Cable** (between routers)
+- **2 Ethernet Cables** (PCs to routers)
+
+### 2️⃣ Assign IP Addresses
+
+#### **PC1 Configuration (Subnet 1)**
+```text
+IP Address: 192.168.1.2
+Subnet Mask: 255.255.255.0
+Default Gateway: 192.168.1.1
+```
+
+#### **PC2 Configuration (Subnet 2)**
+```text
+IP Address: 192.168.2.2
+Subnet Mask: 255.255.255.0
+Default Gateway: 192.168.2.1
+```
+
+### 3️⃣ Router Configuration
+
+#### **Router1 Configuration**
+```bash
+enable
+configure terminal
+interface GigabitEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+interface Serial0/0/0
+ip address 10.10.0.1 255.255.255.252
+clock rate 64000
+no shutdown
+exit
+ip route 192.168.2.0 255.255.255.0 10.10.0.2
+```
+
+#### **Router2 Configuration**
+```bash
+enable
+configure terminal
+interface GigabitEthernet0/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+interface Serial0/0/0
+ip address 10.10.0.2 255.255.255.252
+no shutdown
+exit
+ip route 192.168.1.0 255.255.255.0 10.10.0.1
+```
+
+### 4️⃣ Verify Network Connectivity
+
+#### **Ping from PC1 to PC2**
+```bash
+ping 192.168.2.2
+```
+
+#### **Check Routing Table on Router1**
+```bash
+show ip route
+```
+Expected output:
+```text
+C 192.168.1.0/24 is directly connected, GigabitEthernet0/0
+S 192.168.2.0/24 [1/0] via 10.10.0.2
+C 10.10.0.0/30 is directly connected, Serial0/0/0
+```
+
+#### **Check Routing Table on Router2**
+```bash
+show ip route
+```
+Expected output:
+```text
+C 192.168.2.0/24 is directly connected, GigabitEthernet0/0
+S 192.168.1.0/24 [1/0] via 10.10.0.1
+C 10.10.0.0/30 is directly connected, Serial0/0/0
+```
+
+## 🌟 Summary
+- Configured **two subnets** connected via **two routers**.
+- Assigned **IP addresses** to all devices.
+- Set up **static routes** for subnet communication.
+- Verified connectivity with **ping** and **show ip route**.
