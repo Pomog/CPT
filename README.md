@@ -193,6 +193,78 @@ A **default gateway** is the router’s IP address within a subnet that a device
 - PC0’s default gateway is `192.168.1.1`.
 - PC1’s default gateway is `192.168.2.1`.
 
-## Exercise 4
+## Exercise 5
 ### Objectives
 - Creating the Network in Cisco Packet Tracer
+- Create a network with two subnets that can communicate with each other.
+- Ensure that all devices within the same switch can communicate.
+- Ensure that inter-subnet communication is enabled via a router.
+
+### Concept Descriptions
+
+| Concept            | Description |
+|--------------------|-------------|
+| **Subnetting**    | Divides a network into smaller segments to improve efficiency. |
+| **CIDR Notation** | Represents subnet size (e.g., /29 = 6 usable IPs). |
+| **Default Gateway** | The router IP used by devices to communicate outside their subnet. |
+| **Router Interfaces** | Connect different subnets and enable communication. |
+| **Ping Command** | Used to test connectivity between devices. |
+| **IP Configuration** | Each device must have an IP, subnet mask, and default gateway. |
+
+### Subnet Details
+
+| Subnet Name | Network Address | Subnet Mask     | CIDR | Usable IP Range         | Broadcast Address | Router Interface |
+|-------------|----------------|-----------------|------|-------------------------|-------------------|-----------------|
+| **Subnet 1** | 192.168.1.0    | 255.255.255.248 | /29  | 192.168.1.2 - 192.168.1.6 | 192.168.1.7       | 192.168.1.1     |
+| **Subnet 2** | 192.168.1.8    | 255.255.255.248 | /29  | 192.168.1.10 - 192.168.1.14 | 192.168.1.15  | 192.168.1.9     |
+
+### Subnet 1: 192.168.1.0/29
+
+| Device        | IP Address     | Subnet Mask     | Default Gateway |
+|--------------|---------------|----------------|----------------|
+| **Router (G0/0)** | 192.168.1.1 | 255.255.255.248 | - |
+| **PC1**       | 192.168.1.2   | 255.255.255.248 | 192.168.1.1 |
+| **PC2**       | 192.168.1.3   | 255.255.255.248 | 192.168.1.1 |
+| **PC3**       | 192.168.1.4   | 255.255.255.248 | 192.168.1.1 |
+| **PC4**       | 192.168.1.5   | 255.255.255.248 | 192.168.1.1 |
+| **PC5**       | 192.168.1.6   | 255.255.255.248 | 192.168.1.1 |
+
+### Subnet 2: 192.168.1.8/29
+
+| Device        | IP Address     | Subnet Mask     | Default Gateway |
+|--------------|---------------|----------------|----------------|
+| **Router (G0/1)** | 192.168.1.9 | 255.255.255.248 | - |
+| **PC6**       | 192.168.1.10  | 255.255.255.248 | 192.168.1.9 |
+| **PC7**       | 192.168.1.11  | 255.255.255.248 | 192.168.1.9 |
+| **PC8**       | 192.168.1.12  | 255.255.255.248 | 192.168.1.9 |
+| **PC9**       | 192.168.1.13  | 255.255.255.248 | 192.168.1.9 |
+| **PC10**      | 192.168.1.14  | 255.255.255.248 | 192.168.1.9 |
+
+
+#### Conceptual 
+📌 Subnetting
+- Subnetting divides a large network into smaller, more manageable sub-networks.
+- The Subnet Mask (e.g., 255.255.255.248) defines the range of IPs in a subnet.
+- The CIDR Notation (e.g., /29) represents how many bits are used for the network.
+- Each subnet contains:
+-- Network Address (first IP) – Identifies the subnet.
+-- Usable IP Range – Assigned to hosts (PCs, servers, etc.).
+-- Broadcast Address (last IP) – Used to send messages to all devices in the subnet.
+
+📌 Router Configuration
+- The router is responsible for inter-subnet communication.
+- It has two interfaces:
+-- GigabitEthernet0/0 (Subnet 1) → 192.168.1.1
+-- GigabitEthernet0/1 (Subnet 2) → 192.168.1.9
+- Each PC uses its respective router interface as the gateway.
+
+📌 Default Gateway
+- A default gateway is the router's IP address within a subnet.
+- All devices use this IP to communicate outside their subnet.
+
+📌 Ping Testing
+To verify connectivity:
+```
+ping 192.168.1.3  # Test PC1 → PC2 (same subnet)
+ping 192.168.1.10 # Test PC1 → PC6 (different subnet)
+```
