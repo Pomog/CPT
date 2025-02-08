@@ -383,3 +383,55 @@ C 10.10.0.0/30 is directly connected, Serial0/0/0
 - Assigned **IP addresses** to all devices.
 - Set up **static routes** for subnet communication.
 - Verified connectivity with **ping** and **show ip route**.
+
+
+## Exercise 7
+### Objectives
+- Connecting Two Subnets Using Routers and Switches
+### Subnet 1
+- **Network:** `192.168.1.0/24`
+- **Router Interface (R1):** `192.168.1.1`
+- **Devices:** `192.168.1.2`, `192.168.1.3`, etc.
+
+### Subnet 2
+- **Network:** `192.168.2.0/24`
+- **Router Interface (R2):** `192.168.2.1`
+- **Devices:** `192.168.2.2`, `192.168.2.3`, etc.
+
+---
+
+## Configuration Steps
+
+### 1. Assign IP Addresses to Devices
+For each PC:
+- Open **Desktop** > **IP Configuration**
+- Assign the appropriate **IP Address** and **Subnet Mask**  
+  Example for PC1 in Subnet 1:
+  ```
+  IP Address: 192.168.1.2 Subnet Mask: 255.255.255.0 Gateway: 192.168.1.1
+  ```
+### 2. Configure Router Interfaces
+Using the **GUI**:
+- Open the **Router** > **Config** Tab  
+- Select **INTERFACE** > **GigabitEthernet0/0** IPv4 Address: 192.168.1.1 Subnet Mask: 255.255.255.0
+- Select **INTERFACE** > **GigabitEthernet0/1** IPv4 Address: 192.168.2.1 Subnet Mask: 255.255.255.0
+
+
+Using **CLI**:
+```bash
+enable
+configure terminal
+interface GigabitEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface GigabitEthernet0/1
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+```
+### 3. Configure Static Routes
+To allow communication between subnets:
+- ip route 192.168.2.0 255.255.255.0 192.168.2.1
+- ip route 192.168.1.0 255.255.255.0 192.168.1.1
